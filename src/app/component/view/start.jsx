@@ -17,13 +17,13 @@ export default React.createClass({
 
   getInitialState() {
     return {
-      modalOpen: false,
+      signupOpen: false,
     };
   },
 
-  toggleSignup(){
+  toggleSignupModal(){
     this.setState({
-      modalOpen: !this.state.modalOpen,
+      signupOpen: !this.state.signupOpen,
     });
   },    
 
@@ -36,17 +36,17 @@ export default React.createClass({
   },
 
   render() {
+  
+    let cancelButton = (
+      <FlatButton label="Cancel" secondary={true} onTouchTap={this.toggleSignupModal} />
+    );
 
     let submitButton = (
       <FlatButton label="Submit" secondary={true} onTouchTap={this.handleSignup} />
     );
-  
-    let cancelButton = (
-      <FlatButton label="Cancel" secondary={true} onTouchTap={this.toggleSignup} />
-    );
 
     let signupMenu = (
-      <ButtonMenu actions={[submitButton, cancelButton]} />
+      <ButtonMenu actions={[cancelButton, submitButton]} />
     );
   
     let loginButton = (
@@ -54,7 +54,7 @@ export default React.createClass({
     );
   
     let signupButton = (
-      <RaisedButton style={{margin:'5px'}} label="Sign Up" secondary={true} onTouchTap={this.toggleSignup} />
+      <RaisedButton style={{margin:'5px'}} label="Sign Up" secondary={true} onTouchTap={this.toggleSignupModal} />
     );
   
     let loginMenu = (
@@ -71,7 +71,7 @@ export default React.createClass({
 
     return (
      <div>
-        <Modal open={this.state.modalOpen} title="Sign Up" content={signupForm} actions={signupMenu} />
+        <Modal open={this.state.signupOpen} title="Sign Up" content={signupForm} actions={signupMenu} />
         <Screen content={loginForm} actions={loginMenu} />  
      </div>
     );

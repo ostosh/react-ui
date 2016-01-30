@@ -11,7 +11,7 @@ export default React.createClass({
     open: React.PropTypes.bool.isRequired,
     title: React.PropTypes.string.isRequired,
     content: React.PropTypes.element.isRequired,       
-    actions: React.PropTypes.element.isRequired,
+    actions: React.PropTypes.element,
   }, 
 
  render() {

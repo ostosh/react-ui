@@ -6,6 +6,7 @@ export default React.createClass({
   propTypes : {
     icon: React.PropTypes.element.isRequired,       
     items: React.PropTypes.node,
+    tooltip: React.PropTypes.string,
   }, 
 
   _getItemObjects(items) {
@@ -21,7 +22,11 @@ export default React.createClass({
   render() {
 
     let iconButton = (
-      <IconButton touch={true}>{this.props.icon}</IconButton>
+      <IconButton 
+        tooltip={this.props.tooltip} 
+        touch={true}>
+          {this.props.icon}
+      </IconButton>
      );
 
     let items = this._getItemObjects(this.props.items);

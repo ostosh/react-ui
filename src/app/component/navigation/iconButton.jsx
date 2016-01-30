@@ -3,13 +3,17 @@ import IconButton from 'material-ui/lib/icon-button';
 
 export default React.createClass({
   propTypes : {
+    onClick: React.PropTypes.func,
     icon: React.PropTypes.element.isRequired,
     tooltip: React.PropTypes.string,
   }, 
 
   render() {
     return (
-      <IconButton tooltip={this.props.tooltip}>
+      <IconButton 
+       onClick={this.props.onClick} 
+       touch={true} 
+       tooltip={this.props.tooltip}>
         {this.props.icon}
       </IconButton>
     );
