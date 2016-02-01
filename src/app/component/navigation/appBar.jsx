@@ -17,17 +17,9 @@ import LocationOnIcon from 'material-ui/lib/svg-icons/communication/location-on'
 import IconMenu from './iconMenu';
 import IconButton from './iconButton';
 import ButtonMenu from './buttonContainer';
-import Popover from '../container/popover';
-import Search from '../form/search';
-
-
-
-
-
-
-
-
-
+import Modal from '../container/modal';
+import SearchForm from '../form/search';
+import BroadcastForm from '../form/broadcast';
 
 const navStyle = {
   background: 'none',
@@ -54,6 +46,14 @@ export default React.createClass({
     });
   },    
   
+  handleSearch() {
+    this.refs.searchForm.submit();
+  },
+
+  handleBroadcast() {
+    this.refs.broadcastForm.submit();
+  },
+
   render() {
 
     let TODO = (
@@ -61,15 +61,23 @@ export default React.createClass({
     );
     
     let searchForm = (
-      <Search ref='searchForm' />
+      <SearchForm ref='searchForm' />
     );
   
     let cancelSearchButton = (
       <FlatButton style={{margin:'5px'}} label="Cancel" secondary={true} onTouchTap={this.toggleSearchPopOver} />
     );
 
+    let searchButton = (
+      <FlatButton style={{margin:'5px'}} label="Search" secondary={true} onTouchTap={this.handleSearch} />
+    );
+
     let searchMenu = (
-      <ButtonMenu actions={[cancelSearchButton]} />
+      <ButtonMenu actions={[cancelSearchButton, searchButton]} />
+    );
+
+    let broadcastForm = (
+      <BroadcastForm ref='broadcastForm' />
     );
 
     let cancelMessageButton = (
@@ -77,7 +85,7 @@ export default React.createClass({
     );
 
     let broadcastButton = (
-      <FlatButton style={{margin:'5px'}} label="Broadcast" secondary={true} onTouchTap={this.handleLogin} />
+      <FlatButton style={{margin:'5px'}} label="Broadcast" secondary={true} onTouchTap={this.handleBroadcast} />
     );
  
     let messageMenu = (
@@ -102,8 +110,8 @@ export default React.createClass({
           <IconMenu tooltip={'TODO'} icon={<AppIcon />} items={[TODO, TODO]} />
         </ToolbarGroup>
       </Toolbar>
-      <Popover open={this.state.searchOpen} title="Search" content={searchForm} actions={searchMenu} />
-      <Popover open={this.state.messageOpen} title="Broadcast" content={searchForm} actions={messageMenu} />
+      <Modal open={this.state.searchOpen} title="Search" content={searchForm} actions={searchMenu} />
+      <Modal open={this.state.messageOpen} title="Broadcast" content={broadcastForm} actions={messageMenu} />
      </div>
     );
   },
