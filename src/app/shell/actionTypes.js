@@ -1,0 +1,2 @@
+export const TOGGLE_MODAL = 'TOGGLE_MODAL'
+export const REGISTER_MODAL = 'REGISTER_MODAL'
