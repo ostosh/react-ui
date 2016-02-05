@@ -1,18 +1,20 @@
-const initialTimeState = {}
-export function time(state = initialTimeState, action) {
-  console.log('time reducer called with state ', state , ' and action ', action);
+import { List, Map, fromJS } from 'immutable';
+import { combineReducers } from 'redux';
 
-  switch (action.type) {
-    case 'GET_TIME_REQUEST':
-      return {
-      };
-    case 'GET_TIME_SUCCESS':
-      return {
-      };
-    case 'GET_TIME_FAILURE':
-      return {
-      };
-    default:
-      return state;
-  }
+import validator from '../util/validator';
+import { TOGGLE_MODAL, REGISTER_MODAL } from './actionTypes';
+
+const modal = (state = Map({}), action) => {
+  if(action.type === REGISTER_MODAL)
+    return state.set(action.data.modal, Map({
+      'open' : false,
+    }));
+  else if(action.type === TOGGLE_MODAL && state.has(action.data.modal))
+    return state.updateIn([action.data.modal, 'open'], open => !open);
+  else
+    return state;
+};
+
+export  {
+  modal,
 }
