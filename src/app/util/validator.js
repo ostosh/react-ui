@@ -33,6 +33,14 @@ validator.extend('isString', function (val) {
   return typeof val === 'string';
 });
 
+validator.extend('isBoolean', function (val) {
+  return typeof val === 'boolean';
+});
+
+validator.extend('isNumber', function (val) {
+  return typeof val === 'number';
+});
+
 validator.isArray = function (arr) {
   return arr instanceof Array;
 };
