@@ -1,4 +1,4 @@
-import validator from 'validator'
+import validator from 'validator';
 
 //string validation
 
@@ -25,9 +25,9 @@ validator.hasField = function (obj, field) {
 
 //type validation
 
-validator.isObject= function (obj) {
+validator.extend('isObject', function (obj) {
   return obj instanceof Object;
-};
+});
 
 validator.extend('isString', function (val) {
   return typeof val === 'string';
@@ -41,13 +41,13 @@ validator.extend('isNumber', function (val) {
   return typeof val === 'number';
 });
 
-validator.isArray = function (arr) {
+validator.extend('isArray', function (arr) {
   return arr instanceof Array;
-};
+});
 
-validator.isFunction = function (fn) {
+validator.extend('isFunction', function (fn) {
   return fn instanceof Function;
-};
+});
 
 export default validator;     
 

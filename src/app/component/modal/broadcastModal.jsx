@@ -42,7 +42,7 @@ export default React.createClass({
     );
 
     return (
-      <Modal open={this.state.open} title="Sign Up" content={broadcastForm} actions={broadcastMenu} />
+      <Modal open={this.props.open} title="Sign Up" content={broadcastForm} actions={broadcastMenu} />
     );
   },
 });

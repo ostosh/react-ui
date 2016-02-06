@@ -14,6 +14,10 @@ export default React.createClass({
     actions: React.PropTypes.element,
   }, 
 
+  shouldComponentUpdate: function(nextProps, nextState) {
+    return this.props.open !== nextProps.open;
+  },
+
  render() {
     return (
       <Dialog 
