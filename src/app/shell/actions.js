@@ -1,15 +1,15 @@
-import { TOGGLE_MODAL, REGISTER_MODAL } from './actionTypes'
+import { OPEN_MODAL, CLOSE_MODAL } from './actionTypes';
 
-export const toggleModal = (modal) => {
+export const openModal = (modal) => {
   return {
-    type: TOGGLE_MODAL,
+    type: OPEN_MODAL,
     data: {modal: modal},
   }
 };
 
-export const registerModal = (modal) => {
+export const closeModal = (modal) => {
   return {
-    type: REGISTER_MODAL,
+    type: CLOSE_MODAL,
     data: {modal: modal},
   }
 };
