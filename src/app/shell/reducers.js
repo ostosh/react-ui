@@ -1,20 +1,18 @@
-import { List, Map, fromJS } from 'immutable';
+import { Map } from 'immutable';
 import { combineReducers } from 'redux';
 
 import validator from '../util/validator';
-import { TOGGLE_MODAL, REGISTER_MODAL } from './actionTypes';
+import { OPEN_MODAL, CLOSE_MODAL } from './actionTypes';
 
-const modal = (state = Map({}), action) => {
-  if(action.type === REGISTER_MODAL)
-    return state.set(action.data.modal, Map({
-      'open' : false,
-    }));
-  else if(action.type === TOGGLE_MODAL && state.has(action.data.modal))
-    return state.updateIn([action.data.modal, 'open'], open => !open);
+const modals = (state = Map({active: 'NONE'}), action) => {
+  if(action.type === OPEN_MODAL)
+    return state.set('active', action.data.modal);
+  else if (action.type === CLOSE_MODAL)
+    return state.set('active', 'NONE');
   else
     return state;
 };
 
 export  {
-  modal,
+  modals,
 }
