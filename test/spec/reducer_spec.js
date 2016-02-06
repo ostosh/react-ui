@@ -1,90 +1,60 @@
 import { List, Map, fromJS } from 'immutable';
 import { expect } from 'chai';
 
-import { TOGGLE_MODAL, REGISTER_MODAL } from '../../src/app/shell/actionTypes';
-import { modal } from '../../src/app/shell/reducers';
+import { OPEN_MODAL, CLOSE_MODAL } from '../../src/app/shell/actionTypes';
+import { modals } from '../../src/app/shell/reducers';
 
-describe('modal reducer', () => {
-
+describe('modals reducer', () => {
+  
   it('it inits state without initial state', () => {
-    let stateBefore = Map({});
-    let action = {type: REGISTER_MODAL, data: {modal: 'TEST_MODAL'}};
-    let stateAfter = modal(stateBefore, action);     
-		expect(stateAfter).to.not.be.empty;
-	});
-
-  it('it returns a registered modal state', () => {
-    let stateBefore = Map({});
-    let action = {type: REGISTER_MODAL, data: {modal: 'TEST_MODAL'}};
-    let stateAfter = modal(stateBefore, action);
-    
+    let stateAfter = modals(undefined, {type:'TEST'});     
     expect(stateAfter).to.equal(fromJS({
-      TEST_MODAL: {
-        open: false
-    }}));
+      active: 'NONE'
+    }));
+  });
 
-	});
-
-	it('it returns a toggled modal open state', () => {
-    let stateBefore = Map({});
-    let action = {type: REGISTER_MODAL, data: {modal: 'TEST_MODAL'}};
-    let stateAfter = modal(stateBefore, action);
-    
+  it('it returns active modal state after explicit open', () => {
+    let action = {type: OPEN_MODAL, data: {modal: 'TEST_MODAL'}};
+    let stateAfter = modals(undefined, action);
     expect(stateAfter).to.equal(fromJS({
-      TEST_MODAL: {
-        open: false
-    }}));
- 
-    action = {type: TOGGLE_MODAL, data: {modal: 'TEST_MODAL'}};
-    stateAfter = modal(stateAfter, action);
-    
+      active: 'TEST_MODAL'
+    }));
+
+  });
+
+  it('it returns closed modal state after explicit close', () => {
+
+    let action = {type: OPEN_MODAL, data: {modal: 'TEST_MODAL'}};
+    let stateAfter = modals(undefined, action);
     expect(stateAfter).to.equal(fromJS({
-      TEST_MODAL: {
-        open: true
-    }}));
+      active: 'TEST_MODAL'
+    }));
 
-	});
-
-	it('it returns a toggled modal close state', () => {
-    let stateBefore = Map({});
-    let action = {type: REGISTER_MODAL, data: {modal: 'TEST_MODAL'}};
-    let stateAfter = modal(stateBefore, action);
-    
+    action = {type: CLOSE_MODAL, data: {modal: 'TEST_MODAL'}};
+    stateAfter = modals(undefined, action);
     expect(stateAfter).to.equal(fromJS({
-      TEST_MODAL: {
-        open: false
-    }}));
-    
-    action = {type: TOGGLE_MODAL, data: {modal: 'TEST_MODAL'}};
-    stateAfter = modal(stateAfter, action);
-    
+      active: 'NONE'
+    }));
+
+  });
+
+
+  it('it returns new active modal state after open with implicit close', () => {
+
+    let action = {type: OPEN_MODAL, data: {modal: 'TEST_MODALT_A'}};
+    let stateAfter = modals(undefined, action);
     expect(stateAfter).to.equal(fromJS({
-      TEST_MODAL: {
-        open: true
-    }}));
-    
-    stateAfter = modal(stateAfter, action);
-    
+      active: 'TEST_MODALT_A'
+    }));
+
+    action = {type: OPEN_MODAL, data: {modal: 'TEST_MODAL_B'}};
+    stateAfter = modals(undefined, action);
     expect(stateAfter).to.equal(fromJS({
-      TEST_MODAL: {
-        open: false
-    }}));
+      active: 'TEST_MODAL_B'
+    }));
 
-	});
+  });
 
-  it('it returns a unmodified state for unregistered modal', () => {
-    let stateBefore = Map({});
-    let action = {type: TOGGLE_MODAL, data: {modal: 'TEST_MODAL'}};
-    let stateAfter = modal(stateBefore, action);
-		expect(stateAfter).to.be.empty;
-	});
-
-  it('it returns a unmodified state for null modal', () => {
-    let stateBefore = Map({});
-    let action = {type: TOGGLE_MODAL, data: {}};
-    let stateAfter = modal(stateBefore, action);
-		expect(stateAfter).to.be.empty;
-	});
 
 
 });
