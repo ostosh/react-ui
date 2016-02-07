@@ -3,6 +3,7 @@ import IconMenu from 'material-ui/lib/menus/icon-menu';
 import IconButton from 'material-ui/lib/icon-button';
 
 export default React.createClass({
+  
   propTypes : {
     icon: React.PropTypes.element.isRequired,       
     items: React.PropTypes.node,

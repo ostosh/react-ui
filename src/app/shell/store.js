@@ -9,4 +9,4 @@ export default function(data) {
   let store = finalCreateStore(reducer, data);
 
   return store;
-}
+};

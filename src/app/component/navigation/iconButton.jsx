@@ -11,9 +11,9 @@ export default React.createClass({
   render() {
     return (
       <IconButton 
-       onClick={this.props.onClick} 
-       touch={true} 
-       tooltip={this.props.tooltip}>
+        onClick={this.props.onClick} 
+        touch={true} 
+        tooltip={this.props.tooltip}>
         {this.props.icon}
       </IconButton>
     );
