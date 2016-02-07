@@ -1,32 +1,52 @@
 import React from 'react';
 import TextField from 'material-ui/lib/text-field';
+import FlatButton from 'material-ui/lib/flat-button';
 
 export default React.createClass({
-  
-  _handleSearch() {
-    console.log('TODO: search with response');
+
+  propTypes : {
+    handleClose: React.PropTypes.func.isRequired,  
+  }, 
+
+  close(){
+    this.props.handleClose();
   },
-  _handlePreSearch(){
+
+  preSubmit(){
     console.log('TODO: presearch with response');
   } , 
 
   submit(){
-    this._handleSearch();
+    console.log('TODO: search with response');
+    this.close();
   },
 
-  render() {   
+  render() {
     return (
-      <div><div>
+      <div>
         <TextField 
-          ref={(ref) => this.account = ref}
-          onChange={this._handleSearch}
-          hintText="Search Kin" 
+          ref={'SEARCH_FIELD'}
+          onChange={this.preSubmit}
+          hintText="Search" 
           fullWidth={true}
           type='text'
         />
-      </div></div>
+        <FlatButton 
+          style={{margin:'5px'}} 
+          label="Cancel" 
+          secondary={true} 
+          onTouchTap={this.close} 
+        />
+        <FlatButton 
+          style={{margin:'5px'}} 
+          label="Search" 
+          secondary={true} 
+          onTouchTap={this.submit} 
+        />
+      </div>
     );
   },
-
 });
+
+
 
