@@ -1,11 +1,23 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
 
-import validator from '../../util/validator'
+import validator from '../../util/validator';
+import { openModal } from '../../shell/actions';
+import { SIGNUP_MODAL } from '../container/modals';
 
-export default React.createClass({
- 
+const containerStyle = {
+  textAlign: 'center',
+  paddingTop: 200,
+};
+
+const LoginForm =  React.createClass({
+
+  propTypes : {
+    openSingupModal: React.PropTypes.func.isRequired,       
+  },
+
   _handleLogin() {
     console.log('TODO: login with response');
   },
@@ -21,13 +33,12 @@ export default React.createClass({
   _handleInvalidMobile(){
    console.log('TODO: invalid mobile');
   },
-
   _handleEmptyPassword(){
     console.log('TODO: empty password');
   } , 
 
-  isAccountValid(){
-    let input = validator.trim(this.account.getValue());
+  validateAccount(){
+    let input = validator.trim(this.refs.ACCOUNT_FIELD.getValue());
     if(validator.equals(input, '')){
       this._handleEmptyAccount();
       return false;
@@ -46,39 +57,79 @@ export default React.createClass({
     return false;
 
   },
-  isPasswordValid(){
-    let input = validator.trim(this.password.getValue());
-    if(!validator.equals(input, ''))
+
+  validatePassword(){
+    let input = validator.trim(this.refs.PASSWORD_FIELD.getValue());
+    if(validator.isPassword(input))
       return true;
     this._handleEmptyPassword();
     return false;
   },
 
-  isValid(){
-    return this.isAccountValid() && this.isPasswordValid();
+  validate(){
+    return this.validateAccount() && this.validatePassword();
   },
 
   submit(){
-    if(this.isValid())
+    if(this.validate())
       this._handleLogin();
   },
 
   render() {
     return (
-      <div><div>
+      <div style={containerStyle}>
         <TextField 
-          ref={(ref) => this.account = ref} 
+          ref={'ACCOUNT_FIELD'} 
           hintText="Email or Mobile"
           type='text'
         />
-      </div><div>
+        <div></div>
         <TextField 
-          ref={(ref) => this.password = ref} 
+          ref={'PASSWORD_FIELD'} 
           hintText="Password"
           type='password'
         />
-      </div></div>
+        <div></div>
+        <RaisedButton 
+          style={{margin:'5px'}} 
+          label="Log In" 
+          secondary={true} 
+          onTouchTap={this.submit} 
+        />
+        <RaisedButton 
+          style={{margin:'5px'}} 
+          label="Sign Up" 
+          secondary={true} 
+          onTouchTap={this.props.openSingupModal} 
+        />
+      </div>
     );
   },
 });
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    openSingupModal: () => {
+      dispatch(openModal(SIGNUP_MODAL))
+    },
+  }
+};
+
+export const Login = connect(
+  undefined,
+  mapDispatchToProps
+)(LoginForm);
+
+export default Login;
+
+
+
+
+
+
+
+
+
+
+
 
