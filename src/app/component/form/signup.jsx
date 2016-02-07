@@ -1,10 +1,15 @@
 import React from 'react';
 import TextField from 'material-ui/lib/text-field';
+import FlatButton from 'material-ui/lib/flat-button';
 
-import validator from '../../util/validator'
+import validator from '../../util/validator';
 
 export default React.createClass({
-  
+
+  propTypes : {
+    handleClose: React.PropTypes.func.isRequired,  
+  }, 
+
   _handleSignup() {
     console.log('TODO: login with response');
   },
@@ -27,8 +32,8 @@ export default React.createClass({
     console.log('TODO: invalid password');
   } , 
 
-  isAccountValid(){
-    let input = validator.trim(this.account.getValue());
+  validateAccount(){
+    let input = validator.trim(this.refs.ACCOUNT_FIELD.getValue());
     if(validator.equals(input, '')){
       this._handleEmptyAccount();
       return false;
@@ -47,9 +52,9 @@ export default React.createClass({
     return false;
   },
 
-  isConfirmValid(){
-    let validation = validator.trim(this.account.getValue());
-    let input = validator.trim(this.confirm.getValue());
+  validateConfirm(){
+    let validation = validator.trim(this.refs.ACCOUNT_FIELD.getValue());
+    let input = validator.trim(this.refs.CONFIRM_FIELD.getValue());
     if(validator.equals(validation, input)){
       return true;
     }
@@ -57,52 +62,72 @@ export default React.createClass({
     return false;
   },
 
-  isPasswordValid(){
-    let input = validator.trim(this.password.getValue());
-    console.log(input);
+  validatePassword(){
+    let input = validator.trim(this.refs.PASSWORD_FIELD.getValue());
     if(validator.isPassword(input))
       return true;
     this._handleInvalidPassword();
     return false;
   },
 
-  isValid(){
-    return this.isAccountValid() 
-            && this.isConfirmValid() 
-            && this.isPasswordValid();
+  validate(){
+    return this.validateAccount() 
+      && this.validateConfirm() 
+      && this.validatePassword();
+  },
+
+  close(){
+    this.props.handleClose();
   },
 
   submit(){
-    if(this.isValid())
+    if(this.validate()){
       this._handleSignup();
+      this.close();
+    }
   },
 
-  render() {   
+  render() {
     return (
-      <div><div>
+      <div>
         <TextField 
-          ref={(ref) => this.account = ref} 
-          hintText="Email or mobile" 
+          ref={'ACCOUNT_FIELD'} 
+          hintText="Email or mobile"
+          onChange={this.validateAccount} 
           fullWidth={true}
           type='text'
         />
-      </div><div>
         <TextField 
-          ref={(ref) => this.confirm = ref} 
-          hintText="Confirm email or mobile" 
+          ref={'CONFIRM_FIELD'} 
+          hintText="Confirm email or mobile"
+          onChange={this.validateConfirm}
           fullWidth={true}
           type='text'
         />
-      </div><div>
         <TextField 
-          ref={(ref) => this.password = ref} 
+          ref={'PASSWORD_FIELD'} 
           hintText="Password" 
+          onChange={this.validatePassword}
           fullWidth={true} 
           type='password'
         />
-      </div></div>
+        <FlatButton 
+           style={{margin:'5px'}} 
+           label="Cancel" 
+           secondary={true} 
+           onTouchTap={this.close} 
+        />
+        <FlatButton 
+          style={{margin:'5px'}} 
+          label="Sign Up" 
+          secondary={true} 
+          onTouchTap={this.submit} 
+        />
+      </div>
     );
   },
-
 });
+
+
+
 
