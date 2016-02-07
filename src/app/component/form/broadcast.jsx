@@ -1,28 +1,48 @@
 import React from 'react';
 import TextField from 'material-ui/lib/text-field';
+import FlatButton from 'material-ui/lib/flat-button';
+
 
 export default React.createClass({
 
-  _handleBroadcast() {
-    console.log('TODO: broadast with response');
+  propTypes : {
+    handleClose: React.PropTypes.func.isRequired,  
+  }, 
+
+  close(){
+    this.props.handleClose();
   },
 
   submit(){
-    this._handleBroadcast();
+    console.log('TODO: broadast with response');
+    this.close();
   },
 
-  render() {   
+  render() {
     return (
-      <div><div>
+      <div>
         <TextField 
-          ref={(ref) => this.account = ref}
+          ref={'BROADCAST_FIELD'}
           hintText="Broadcast" 
           fullWidth={true}
           type='text'
         />
-      </div></div>
+        <FlatButton 
+          style={{margin:'5px'}} 
+          label="Cancel" 
+          secondary={true} 
+          onTouchTap={this.close} 
+        />
+        <FlatButton 
+          style={{margin:'5px'}} 
+          label="Broadcast" 
+          secondary={true} 
+          onTouchTap={this.submit} 
+        />
+      </div>
     );
   },
-
 });
+
+
 
