@@ -3,51 +3,44 @@ import validator from 'validator';
 //string validation
 
 validator.extend('isPhone', function (val) {
-  let len = val.match(/\d/g).length;
-  return len===10||len===11;
+  let match = val.match(/\d/g);
+  if(match)
+    return match.length >= 9 && match.length <= 12;
+  return false;
 });
 
 validator.extend('isPassword', function (val) {
-  return this.isString(val) && val.length >= 6;
+  let match = val.match(/\d/g);//TODO
+  if(match)
+    return match.length >= 6 && match.length <= 20;
+  return false;
 });
-
-validator.extend('inRange', function (bounds) {
-  return function(val){
-    return val >= bounds[0] && val <= bounds[1];
-  }
-});
-
-//object validation
-
-validator.hasField = function (obj, field) {
-  return validator.isObject(obj) && field in obj;
-};
 
 //type validation
 
-validator.extend('isObject', function (obj) {
+validator.isObject = function (obj) {
   return obj instanceof Object;
-});
+};
 
-validator.extend('isString', function (val) {
+validator.isString = function (val) {
   return typeof val === 'string';
-});
+};
 
-validator.extend('isBoolean', function (val) {
+validator.isBoolean = function (val) {
   return typeof val === 'boolean';
-});
+};
 
-validator.extend('isNumber', function (val) {
+validator.isNumber = function (val) {
   return typeof val === 'number';
-});
+};
 
-validator.extend('isArray', function (arr) {
+validator.isArray = function (arr) {
   return arr instanceof Array;
-});
+};
 
-validator.extend('isFunction', function (fn) {
+validator.isFunction = function (fn) {
   return fn instanceof Function;
-});
+};
 
 export default validator;     
 
