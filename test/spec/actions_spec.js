@@ -16,7 +16,7 @@ describe('modal actions', () => {
   it('it returns modal toggle action', () => {
     let action = closeModal("TEST_MODAL");
     expect(action).to.have.all.keys('type', 'data');
-		expect(action.type).to.equal(CLOSE_MODAL);
+    expect(action.type).to.equal(CLOSE_MODAL);
     expect(action.data).to.have.all.keys('modal');
     expect(action.data.modal).to.equal("TEST_MODAL");
   });
