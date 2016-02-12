@@ -24,25 +24,29 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <TextField 
-          ref={'SEARCH_FIELD'}
-          onChange={this.preSubmit}
-          hintText="Search" 
-          fullWidth={true}
-          type='text'
-        />
-        <FlatButton 
-          style={{margin:'5px'}} 
-          label="Cancel" 
-          secondary={true} 
-          onTouchTap={this.close} 
-        />
-        <FlatButton 
-          style={{margin:'5px'}} 
-          label="Search" 
-          secondary={true} 
-          onTouchTap={this.submit} 
-        />
+        <div style={{padding: '0px 15px 0px 17px'}}>
+          <TextField 
+            ref={'SEARCH_FIELD'}
+            onChange={this.preSubmit}
+            hintText="Search" 
+            fullWidth={true}
+            type='text'
+          />
+        </div>
+        <div style={{textAlign:'right'}}>
+          <FlatButton 
+            style={{margin:'5px'}} 
+            label="Cancel" 
+            secondary={true} 
+            onTouchTap={this.close} 
+          />
+          <FlatButton 
+            style={{margin:'5px'}} 
+            label="Search" 
+            secondary={true} 
+            onTouchTap={this.submit} 
+          />
+        </div>
       </div>
     );
   },
