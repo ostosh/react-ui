@@ -90,39 +90,43 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <TextField 
-          ref={'ACCOUNT_FIELD'} 
-          hintText="Email or mobile"
-          onChange={this.validateAccount} 
-          fullWidth={true}
-          type='text'
-        />
-        <TextField 
-          ref={'CONFIRM_FIELD'} 
-          hintText="Confirm email or mobile"
-          onChange={this.validateConfirm}
-          fullWidth={true}
-          type='text'
-        />
-        <TextField 
-          ref={'PASSWORD_FIELD'} 
-          hintText="Password" 
-          onChange={this.validatePassword}
-          fullWidth={true} 
-          type='password'
-        />
-        <FlatButton 
-           style={{margin:'5px'}} 
-           label="Cancel" 
-           secondary={true} 
-           onTouchTap={this.close} 
-        />
-        <FlatButton 
-          style={{margin:'5px'}} 
-          label="Sign Up" 
-          secondary={true} 
-          onTouchTap={this.submit} 
-        />
+        <div style={{padding: '0px 15px 0px 17px'}}>
+          <TextField
+            ref={'ACCOUNT_FIELD'} 
+            hintText="Email or mobile"
+            onChange={this.validateAccount} 
+            fullWidth={true}
+            type='text'
+          />
+          <TextField 
+            ref={'CONFIRM_FIELD'} 
+            hintText="Confirm email or mobile"
+            onChange={this.validateConfirm}
+            fullWidth={true}
+            type='text'
+          />
+          <TextField 
+            ref={'PASSWORD_FIELD'} 
+            hintText="Password" 
+            onChange={this.validatePassword}
+            fullWidth={true} 
+            type='password'
+          />
+        </div>
+        <div style={{textAlign:'right'}}>
+          <FlatButton 
+             style={{margin:'5px'}} 
+             label="Cancel" 
+             secondary={true} 
+             onTouchTap={this.close} 
+          />
+          <FlatButton 
+            style={{margin:'5px'}} 
+            label="Sign Up" 
+            secondary={true} 
+            onTouchTap={this.submit} 
+          />
+        </div>
       </div>
     );
   },
