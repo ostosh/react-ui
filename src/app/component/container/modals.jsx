@@ -11,26 +11,54 @@ export const BROADCAST_MODAL = 'BROADCAST_MODAL';
 export const SEARCH_MODAL = 'SEARCH_MODAL';
 export const SIGNUP_MODAL = 'SIGNUP_MODAL';
 
-const customContentStyle = {
+const modalStyle = {
   maxWidth: '400px',
+};
+
+const titleStyle = {
+   padding: '15px 15px 0px 15px', 
+   marginBottom: '5px', 
+};
+
+const bodyStyle = {
+   padding: '0px 0px 0px 0px', 
+   marginBottom: '0px', 
 };
 
 const Modals = ({ modal, active, handleOpen, handleClose }) => {
   if(active === BROADCAST_MODAL)
     return(
-      <Dialog open={true} title={"Broascast"}>
+      <Dialog 
+       contentStyle={modalStyle} 
+       bodyStyle={bodyStyle} 
+       titleStyle={titleStyle} 
+       open={true} 
+       title={"Broadcast"}
+      >
         <BroadcastForm handleClose={handleClose} />
       </Dialog>
     );
   else if(active === SEARCH_MODAL)
     return(
-      <Dialog open={true} title={"Search"}>
+      <Dialog
+       contentStyle={modalStyle} 
+       bodyStyle={bodyStyle} 
+       titleStyle={titleStyle} 
+       open={true} 
+       title={"Search"}
+      >
         <SearchForm handleClose={handleClose} />
       </Dialog>
     );
   else if(active === SIGNUP_MODAL)
     return(
-      <Dialog open={true} title={"Signup"}>
+      <Dialog        
+       contentStyle={modalStyle} 
+       bodyStyle={bodyStyle} 
+       titleStyle={titleStyle} 
+       open={true}  
+       title={"Signup"}
+      >
         <SignupForm handleClose={handleClose} />
       </Dialog>
     );
