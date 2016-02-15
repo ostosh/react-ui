@@ -2,19 +2,21 @@ import validator from 'validator';
 
 //string validation
 
-validator.extend('isPhone', function (val) {
+validator.isPhone = function (val) {
+  val = ''+val;
   let match = val.match(/\d/g);
   if(match)
     return match.length >= 9 && match.length <= 12;
   return false;
-});
+};
 
-validator.extend('isPassword', function (val) {
+validator.isPassword = function (val) {
+  val = ''+val;
   let match = val.match(/\d/g);//TODO
   if(match)
     return match.length >= 6 && match.length <= 20;
   return false;
-});
+};
 
 //type validation
 
